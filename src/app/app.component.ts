@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { UsersService } from './services/users.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'interceptorApp';
+
+  constructor( private usersService: UsersService ) {
+
+    this.usersService
+      .getUsers()
+      .subscribe(
+        (res: any) => {
+          console.log(res);
+        }, (error) => {
+          console.log('error in request');
+        }
+      );
+
+  }
+
 }
